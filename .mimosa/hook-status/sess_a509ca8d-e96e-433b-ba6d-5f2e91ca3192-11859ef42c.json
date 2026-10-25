@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-10-25T06:46:39.289Z",
+  "sessionId": "sess_a509ca8d-e96e-433b-ba6d-5f2e91ca3192",
+  "event": "PostToolUse",
+  "toolName": "Edit",
+  "file": "/Users/marmot/Documents/z code/test2/chess-kids/src/App.tsx",
+  "outcome": "inconclusive",
+  "coverage": "partial",
+  "findingCount": 0,
+  "durationMs": 3,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

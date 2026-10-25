@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 背景圆角矩形 -->
+  <rect x="0" y="0" width="512" height="512" rx="96" fill="#f39c12"/>
+  <rect x="0" y="0" width="512" height="512" rx="96" fill="url(#g)" fill-opacity="0.35"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+  </defs>
+  <!-- 迷你棋盘（留出安全边距，适配 maskable 裁剪） -->
+  <g transform="translate(96,96)">
+    <rect x="0" y="0" width="320" height="320" rx="24" fill="#f5deb3"/>
+    <g fill="#8b5a2b">
+      <rect x="0"   y="0"   width="40" height="40" rx="6"/>
+      <rect x="80"  y="0"   width="40" height="40" rx="6"/>
+      <rect x="160" y="0"   width="40" height="40" rx="6"/>
+      <rect x="240" y="0"   width="40" height="40" rx="6"/>
+      <rect x="40"  y="40"  width="40" height="40" rx="6"/>
+      <rect x="120" y="40"  width="40" height="40" rx="6"/>
+      <rect x="200" y="40"  width="40" height="40" rx="6"/>
+      <rect x="280" y="40"  width="40" height="40" rx="6"/>
+      <rect x="0"   y="80"  width="40" height="40" rx="6"/>
+      <rect x="80"  y="80"  width="40" height="40" rx="6"/>
+      <rect x="160" y="80"  width="40" height="40" rx="6"/>
+      <rect x="240" y="80"  width="40" height="40" rx="6"/>
+      <rect x="40"  y="120" width="40" height="40" rx="6"/>
+      <rect x="120" y="120" width="40" height="40" rx="6"/>
+      <rect x="200" y="120" width="40" height="40" rx="6"/>
+      <rect x="280" y="120" width="40" height="40" rx="6"/>
+      <rect x="0"   y="160" width="40" height="40" rx="6"/>
+      <rect x="80"  y="160" width="40" height="40" rx="6"/>
+      <rect x="160" y="160" width="40" height="40" rx="6"/>
+      <rect x="240" y="160" width="40" height="40" rx="6"/>
+      <rect x="40"  y="200" width="40" height="40" rx="6"/>
+      <rect x="120" y="200" width="40" height="40" rx="6"/>
+      <rect x="200" y="200" width="40" height="40" rx="6"/>
+      <rect x="280" y="200" width="40" height="40" rx="6"/>
+      <rect x="0"   y="240" width="40" height="40" rx="6"/>
+      <rect x="80"  y="240" width="40" height="40" rx="6"/>
+      <rect x="160" y="240" width="40" height="40" rx="6"/>
+      <rect x="240" y="240" width="40" height="40" rx="6"/>
+      <rect x="40"  y="280" width="40" height="40" rx="6"/>
+      <rect x="120" y="280" width="40" height="40" rx="6"/>
+      <rect x="200" y="280" width="40" height="40" rx="6"/>
+      <rect x="280" y="280" width="40" height="40" rx="6"/>
+    </g>
+    <!-- 白色兵棋子剪影（居中） -->
+    <g transform="translate(160,80)">
+      <circle cx="0" cy="20" r="26" fill="#ffffff" stroke="#5d4037" stroke-width="10"/>
+      <path d="M -44 130 C -44 96 -20 78 0 58 C 20 78 44 96 44 130 Z" fill="#ffffff" stroke="#5d4037" stroke-width="10" stroke-linejoin="round"/>
+    </g>
+  </g>
+</svg>
