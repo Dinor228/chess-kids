@@ -1,26 +1,10 @@
-// 小棋童学国际象棋 · Service Worker
-// 作用：把整个应用缓存到设备上，iPad「添加到主屏幕」后可完全离线游玩。
-// 策略：
-//   - 首次访问预缓存外壳（/、index.html、图标、清单）
-//   - 带哈希的构建产物：缓存优先（新版本发布时文件名变化，天然不会读到旧代码）
-//   - 页面导航：网络优先、失败回退缓存的 index.html（离线也能启动）
-const VERSION = 'chess-kids-v1';
-
-// 基础路径从注册作用域推算：根路径部署是 '/'，
-// GitHub Pages 子路径部署（如 /chess-kids/）也能正确缓存
+// 小棋童学国际象棋 · Service Worker（由 vite 插件在构建时生成，勿手改）
+// 与旧版的关键区别：安装时就把 index.html + 当次全部哈希 JS/CSS/图标/清单预缓存，
+// 首次访问即拥有完整离线包 —— iPad「添加到主屏幕」后离线启动不再白屏。
+// VERSION 为构建时间戳：每次发布自动换代，激活时清除所有旧缓存。
+const VERSION = 'chess-kids-340137866e8b';
 const BASE = new URL('.', self.registration.scope).pathname;
-
-const PRECACHE = [
-  BASE,
-  BASE + 'index.html',
-  BASE + 'manifest.webmanifest',
-  BASE + 'icon.svg',
-  BASE + 'icon-192.png',
-  BASE + 'icon-512.png',
-  BASE + 'icon-maskable-512.png',
-  BASE + 'apple-touch-icon.png',
-  BASE + 'favicon.svg',
-];
+const PRECACHE = ["index.html","assets/index-BUKWpLwE.js","assets/index-C3yM1UCw.css","apple-touch-icon.png","favicon.svg","icon-192.png","icon-512.png","icon-maskable-512.png","icon.svg","index.html","manifest.webmanifest"].map((p) => BASE + p);
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -45,7 +29,7 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
   if (event.request.method !== 'GET') return;
 
-  // 页面导航：网络优先，离线时用缓存的外壳启动
+  // 页面导航：网络优先拿最新版；离线回退到预缓存的 index.html
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
@@ -59,7 +43,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 静态资源：缓存优先，未命中再取网络并写回缓存
+  // 静态资源（哈希文件名，内容变必改名）：缓存优先，未命中回源并写回
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
