@@ -1,16 +1,17 @@
 // 小棋童学国际象棋 · Service Worker（由 vite 插件在构建时生成，勿手改）
 // 与旧版的关键区别：安装时就把 index.html + 当次全部哈希 JS/CSS/图标/清单预缓存，
 // 首次访问即拥有完整离线包 —— iPad「添加到主屏幕」后离线启动不再白屏。
-// VERSION 为构建时间戳：每次发布自动换代，激活时清除所有旧缓存。
+// VERSION 为资产内容哈希：每次发布自动换代，激活时清除所有旧缓存。
 const VERSION = 'chess-kids-340137866e8b';
 const BASE = new URL('.', self.registration.scope).pathname;
-const PRECACHE = ["index.html","assets/index-BUKWpLwE.js","assets/index-C3yM1UCw.css","apple-touch-icon.png","favicon.svg","icon-192.png","icon-512.png","icon-maskable-512.png","icon.svg","index.html","manifest.webmanifest"].map((p) => BASE + p);
+const PRECACHE = ["index.html","assets/index-BUKWpLwE.js","assets/index-C3yM1UCw.css","apple-touch-icon.png","favicon.svg","icon-192.png","icon-512.png","icon-maskable-512.png","icon.svg","manifest.webmanifest"].map((p) => BASE + p);
 
 self.addEventListener('install', (event) => {
+  // 逐项 add（不用 addAll：WebKit 对 addAll 的重复项/重定向更敏感，易静默挂起）
   event.waitUntil(
     caches
       .open(VERSION)
-      .then((cache) => cache.addAll(PRECACHE))
+      .then((cache) => Promise.all(PRECACHE.map((url) => cache.add(url))))
       .then(() => self.skipWaiting()),
   );
 });
